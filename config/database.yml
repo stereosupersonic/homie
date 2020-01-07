@@ -82,6 +82,8 @@ test:
 #
 production:
   <<: *default
-  database: homie_production
-  username: homie
-  password: <%= ENV['HOMIE_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  host: <%= ENV.fetch('DATABASE_HOST') %>
+  port: <%= ENV.fetch('DATABASE_PORT') %>
+  username: <%= ENV.fetch('DATABASE_USERNAME') %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') %>

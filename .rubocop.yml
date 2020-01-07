@@ -1,0 +1,243 @@
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  UseCache: true
+
+  Exclude:
+    - "db/schema.rb"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+
+# Rails
+Rails:
+  Enabled: true
+
+Rails/Delegate:  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/Delegate
+  Enabled: false
+
+Rails/Output:    # http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Rails/Output
+  Enabled: false
+
+Rails/OutputSafety: # https://www.rubydoc.info/gems/rubocop/0.41.2/RuboCop/Cop/Rails/OutputSafety
+  Enabled: false
+
+Rails/FilePath:  # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/FilePath
+  Enabled: false
+
+Rails/ActiveRecordAliases: # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/ActiveRecordAliases
+  Enabled: false
+
+Rails/SkipsModelValidations: # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/SkipsModelValidations
+  Enabled: false
+
+Rails/HttpPositionalArguments: # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/HttpPositionalArguments
+  Enabled: false
+
+Documentation: # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/Documentation
+  Enabled: false
+
+# Bundler
+
+Bundler/OrderedGems:
+  Enabled: false
+
+# Style
+
+# Prefer &&/|| over and/or.
+Style/AndOr:
+  Enabled: true
+#
+Style/MethodMissingSuper:
+  Enabled: false
+# allow german comments
+Style/AsciiComments:
+  Enabled: false
+
+# Do not use braces for hash literals when they are the last argument of a
+# method call.
+Style/BracesAroundHashParameters:
+  Enabled: true
+
+Style/ClassAndModuleChildren:
+  # http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Style/ClassAndModuleChildren
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#namespace-definition
+  Enabled: false
+
+Style/CommentedKeyword: #bug in rubocop  def search_button(link = "#", text = "Suchen", options = {}) is wrong
+  Enabled: false
+
+# Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
+Style/HashSyntax:
+  Enabled: true
+
+# don't use if/unless expression that can be replace with a guard clause.
+Style/GuardClause:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+# use double quotes for strings
+Style/StringLiterals:
+  # http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Style/StringLiterals
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#consistent-string-literals
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/SignalException:
+  # http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Style/SignalException
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#prefer-raise-over-fail
+  EnforcedStyle: only_raise
+
+Style/RegexpLiteral:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/RegexpLiteral
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#percent-r
+  Enabled: false
+
+Style/MutableConstant:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/MutableConstant
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#unless-for-negatives
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/FrozenStringLiteralComment
+  Enabled: false
+
+Style/FormatStringToken:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Style/FormatStringToken
+  Enabled: false
+
+# Use quotes for string literals when they are enough.
+Style/UnneededPercentQ:
+  Enabled: true
+
+Style/SymbolArray:
+  # https://github.com/bbatsov/ruby-style-guide#percent-i
+  Enabled: false
+
+Style/ModuleFunction:
+  # https://github.com/bbatsov/ruby-style-guide#module-function
+  Enabled: false
+
+# Layout
+Layout/AlignHash:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Layout/AlignHash
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+# No extra empty lines.
+Layout/EmptyLines:
+  Enabled: true
+
+# In a regular class definition, no empty lines around the body.
+Layout/EmptyLinesAroundClassBody:
+  Enabled: true
+
+Layout/ExtraSpacing:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/ExtraSpacing
+  AllowForAlignment: true
+
+# Two spaces, no tabs (for indentation).
+Layout/IndentationWidth:
+  Enabled: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/SpaceInsideHashLiteralBraces
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#spaces-operators
+  EnforcedStyle: space
+
+Layout/CaseIndentation:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/CaseIndentation
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#indent-when-to-case
+  Enabled: false
+
+
+## EnforcedStyle: with_first_parameter
+#
+#foo :bar,
+#    :baz
+Layout/AlignParameters:
+  #http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/AlignParameters
+  EnforcedStyle: with_first_parameter
+
+Layout/MultilineOperationIndentation:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/MultilineOperationIndentation
+  EnforcedStyle: indented
+
+Layout/IndentFirstArrayElement:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/IndentArray
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Layout/MultilineMethodCallIndentation
+  Enabled: false
+
+# Lint
+
+# Align `end` with the matching keyword or starting expression except for
+# assignments, where it should be aligned with the LHS.
+
+Layout/EndAlignment:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Layout/EndAlignment
+  EnforcedStyleAlignWith: keyword
+
+Lint/AmbiguousBlockAssociation: # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/AmbiguousBlockAssociation
+                                # https://github.com/konvenit/guidelines/blob/master/ruby.mdruby-style-guide#syntax
+  Exclude:
+    - "spec/**/*"
+# Metrics
+Metrics/LineLength:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/LineLength
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#80-character-limits
+  Max: 130
+
+Metrics/AbcSize:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/AbcSize
+  # http://wiki.c2.com/?AbcMetric
+  Enabled: false
+
+Metrics/MethodLength:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/MethodLength
+  # https://github.com/konvenit/guidelines/blob/master/ruby.md#short-methods
+  Enabled: false
+
+Metrics/ClassLength:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/ClassLength
+  Enabled: false
+
+Metrics/ModuleLength:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/ModuleLength
+  Enabled: false
+
+Metrics/BlockLength:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/BlockLength
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/CyclomaticComplexity
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  # http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Metrics/PerceivedComplexity
+  Enabled: false
+
+# Naming
+Naming/VariableNumber:
+  # http://www.rubydoc.info/gems/rubocop/0.43.0/RuboCop/Cop/Naming/VariableNumber
+  Enabled: false
+#This cop makes sure that predicates are named properly.
+#http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Name/PredicateName
+## bad
+#def has_value?
+#end
+#
+## good
+#def value?
+#end
+Naming/PredicateName:
+  Enabled: false
+
+#https://github.com/bbatsov/ruby-style-guide#accessor_mutator_method_names
+Naming/AccessorMethodName:
+  Enabled: false
