@@ -33,7 +33,7 @@ RUN bundle install --jobs 20 --retry 5 --without development test
 COPY package.json yarn.lock ./
 RUN yarn install
 
-COPY . $RAILS_ROOT
+COPY . .
 
 RUN bin/rails assets:precompile
 

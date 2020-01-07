@@ -85,5 +85,6 @@ production:
   adapter: postgresql
   host: <%= ENV.fetch('DATABASE_HOST') %>
   port: <%= ENV.fetch('DATABASE_PORT') %>
+  database: <%= ENV.fetch('DATABASE_NAME') %>
   username: <%= ENV.fetch('DATABASE_USERNAME') %>
   password: <%= ENV.fetch('DATABASE_PASSWORD') %>
