@@ -17,23 +17,20 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 RUN gem update --system && \
     gem install bundler -v 2.0.2
 
-ENV RAILS_ROOT /usr/src/app/
-RUN mkdir -p $RAILS_ROOT 
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
-# Set working directory
-WORKDIR $RAILS_ROOT
-# Set Rails to run in production
-ENV RAILS_ENV='production'
-ENV RACK_ENV='production' 
-# Adding gems
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle install --jobs 20 --retry 5 --without development test
+ADD Gemfile* $APP_HOME/
+RUN bundle install
 
-COPY package.json yarn.lock ./
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_ENV production
+ENV NODE_ENV production
+
 RUN yarn install
-
-COPY . .
+ADD . $APP_HOME
 
 RUN bin/rails assets:precompile
 
