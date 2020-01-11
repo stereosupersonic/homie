@@ -18,6 +18,6 @@ docker run --name homie \
             -e RAILS_LOG_TO_STDOUT=true \
             -e RAILS_SERVE_STATIC_FILES=true \
             -e RAILS_ENV=production \
-            -p 3000:3000 \
+            -p 3000:80 \
             homie:latest
 ```
