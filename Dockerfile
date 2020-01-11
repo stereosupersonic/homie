@@ -25,8 +25,9 @@ RUN mkdir -p tmp/pids
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 RUN yarn install
-RUN bin/rails assets:precompile
+
 COPY . .
+RUN bin/rails assets:precompile
 
 ENV RAILS_ENV production
 ENV NODE_ENV production
