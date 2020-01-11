@@ -17,25 +17,21 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 RUN gem update --system && \
     gem install bundler -v 2.0.2
 
-ENV APP_HOME /app
-RUN mkdir $APP_HOME
 
-WORKDIR $APP_HOME
+WORKDIR /usr/src/app
 
 RUN mkdir -p tmp/pids
 
-ADD Gemfile* $APP_HOME/
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
+RUN yarn install
+RUN bin/rails assets:precompile
+COPY . .
 
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_ENV production
 ENV NODE_ENV production
 ENV SECRET_KEY_BASE=669bfd9bf5f97461a5b873aac3cebb26df709763d2faf85b2acfd716bd521c06b384d041aba276a7e4b1ae5d50c02054e2a26a1ecb9a6b2167f6d8f0978f7b1d
-RUN yarn install
-ADD . $APP_HOME
-
-RUN bin/rails assets:precompile
 
 EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+
+CMD ["rails", "server", "-b", "0.0.0.0"]  
