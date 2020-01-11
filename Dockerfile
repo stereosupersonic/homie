@@ -19,7 +19,10 @@ RUN gem update --system && \
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
+
 WORKDIR $APP_HOME
+
+RUN mkdir -p tmp/pids
 
 ADD Gemfile* $APP_HOME/
 RUN bundle install
@@ -28,7 +31,7 @@ ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_LOG_TO_STDOUT true
 ENV RAILS_ENV production
 ENV NODE_ENV production
-
+ENV SECRET_KEY_BASE=669bfd9bf5f97461a5b873aac3cebb26df709763d2faf85b2acfd716bd521c06b384d041aba276a7e4b1ae5d50c02054e2a26a1ecb9a6b2167f6d8f0978f7b1d
 RUN yarn install
 ADD . $APP_HOME
 
