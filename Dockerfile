@@ -12,23 +12,24 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   nodejs \
-  yarn
+  yarn \
+  speedtest-cli 
 
 RUN gem update --system && \
     gem install bundler -v 2.0.2
 
+WORKDIR /tmp
+ADD ./Gemfile Gemfile
+ADD ./Gemfile.lock Gemfile.lock
+RUN  bundle install
 
-WORKDIR /usr/src/app
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
 
 RUN mkdir -p tmp/pids
 
-COPY Gemfile Gemfile.lock ./
-RUN bundle install
-
-
-COPY . .
-RUN yarn install
-RUN bin/rails assets:precompile
+RUN yarn && bundle exec rake assets:precompile
 
 ENV RAILS_ENV production
 ENV NODE_ENV production

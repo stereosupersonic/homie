@@ -1,18 +1,6 @@
 version: '3'
 
 services:
-
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-    environment:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgresdb
-      DATABASE_NAME: homie_development
-      
   database:
     image: postgres:12
     ports:
@@ -21,3 +9,17 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgresdb
       POSTGRES_DB: homie_development
+      
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_HOST: database 
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgresdb
+      DATABASE_NAME: homie_development
+      RAILS_LOG_TO_STDOUT: "true" 
+      RAILS_SERVE_STATIC_FILES: "true"

@@ -6,7 +6,7 @@
 docker build -t homie:1.1 -t homie .
 ```
 
-## run image
+## run image 
 
 ```
 docker run --name homie \
