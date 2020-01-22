@@ -31,11 +31,14 @@ gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 
 gem "haml-rails", "~> 2.0"
+gem "will_paginate"
+gem "will_paginate-bootstrap4"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "rspec-rails"
   gem "rubocop", "~> 0.68.1"
+  gem "pry-nav"
 end
 
 group :development do
@@ -43,6 +46,7 @@ group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem "annotate"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end

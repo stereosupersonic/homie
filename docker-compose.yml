@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgresdb
+      DATABASE_NAME: homie_development
+      
+  database:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgresdb
+      POSTGRES_DB: homie_development

@@ -1,0 +1,35 @@
+%h1 Internet Speed
+.p 
+  = "Best download: #{number_to_human_size @best_down.download} - #{format_date @best_down.created_at}"
+.p   
+  = "Worst download: #{number_to_human_size @worst_down.download} - #{format_date @worst_down.created_at}"
+.p
+  = "Last fetch: #{format_datetime InternetSpeed.last&.created_at} - "
+  = "First fetch: #{format_datetime InternetSpeed.first&.created_at} - "
+  = "Entries: #{InternetSpeed.count}"
+
+%table.table.table-striped.table-bordered.table-hover  
+  %thead.thead-dark
+    %tr
+      %th Date
+      %th Status
+      %th Ping
+      %th Upload
+      %th Download
+      %th Ip
+      %th Service Provider
+      %th Country
+
+  %tbody
+    - @internet_speeds.each do |internet_speed|
+      %tr
+        %td= format_datetime internet_speed.created_at
+        %td= internet_speed.status || :ok
+        %td= "#{internet_speed.ping} ms"
+        %td= number_to_human_size internet_speed.upload
+        %td= number_to_human_size internet_speed.download
+        %td= internet_speed.ip
+        %td= internet_speed.isp
+        %td= internet_speed.country
+
+= will_paginate @internet_speeds, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
