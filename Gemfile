@@ -33,6 +33,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "haml-rails", "~> 2.0"
 gem "will_paginate"
 gem "will_paginate-bootstrap4"
+gem "whenever", require: false
 
 group :development, :test do
   gem "rspec-rails"

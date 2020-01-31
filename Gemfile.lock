@@ -64,6 +64,7 @@ GEM
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
+    chronic (0.10.2)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
@@ -231,6 +232,8 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     will_paginate (3.2.1)
     will_paginate-bootstrap4 (0.2.2)
       will_paginate (~> 3.0, >= 3.0.0)
@@ -257,6 +260,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
+  whenever
   will_paginate
   will_paginate-bootstrap4
 
