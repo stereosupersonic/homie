@@ -36,13 +36,11 @@ ENV RAILS_ENV production
 ENV NODE_ENV production
 
 RUN mkdir -p tmp/pids 
-RUN bin/rake assets:precompile
-#RUN bundle exec whenever --update-crontab
 
 ENV SECRET_KEY_BASE=669bfd9bf5f97461a5b873aac3cebb26df709763d2faf85b2acfd716bd521c06b384d041aba276a7e4b1ae5d50c02054e2a26a1ecb9a6b2167f6d8f0978f7b1d
 
-EXPOSE 3000
+RUN RAILS_ENV=production bin/rake assets:precompile
 
-#RUN chmod +x /app/run.sh /app/entrypoint.sh
+EXPOSE 3000
 
 ENTRYPOINT /app/entrypoint.sh

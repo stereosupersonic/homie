@@ -11,5 +11,5 @@ require("channels")
 require("jquery");
 require("bootstrap");
 
-require("../stylesheets/application")
+import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/css/all.css";
