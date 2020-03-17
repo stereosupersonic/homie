@@ -8,8 +8,14 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-require("jquery");
-require("bootstrap");
+import 'bootstrap'
+window.Rails = Rails
 
-require("../stylesheets/application")
+$(document).on("turbolinks:load", () => {
+  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="popover"]').popover()
+})
+
+
+import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/css/all.css";
