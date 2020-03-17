@@ -36,3 +36,17 @@ bin/rake internet_speed:import["~/Downloads/speedtest.log"]
 ### with docker compose
 
 docker-compose run web rake internet_speed:import["~/Downloads/speedtest.log"]
+
+# production
+
+## build
+
+```
+docker-compose -f docker-compose.production.yml build
+```
+
+## run
+
+```
+docker-compose -f docker-compose.production.yml up -d
+```
