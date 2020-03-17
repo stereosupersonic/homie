@@ -4,11 +4,11 @@ services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - "80:3000"
     volumes:
       - .:/app
     environment:
-      DATABASE_HOST: localhost
+      DATABASE_HOST: '192.168.1.69'
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgresdb
       DATABASE_NAME: homie_production
