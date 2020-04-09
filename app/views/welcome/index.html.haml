@@ -1,1 +1,82 @@
+%script{:src => "https://www.gstatic.com/charts/loader.js", :type => "text/javascript"}
+:javascript
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  function drawChart() {
+  var downloadData = JSON.parse('#{@down.to_json.html_safe}');
+  downloadData = [['day', 'download']].concat(downloadData);
+  downloadData = google.visualization.arrayToDataTable(downloadData);
+  
+  var uploadData = JSON.parse('#{@up.to_json.html_safe}');
+  uploadData = [['day', 'upload']].concat(uploadData);
+  uploadData = google.visualization.arrayToDataTable(uploadData);
+  
+  var pingData = JSON.parse('#{@ping.to_json.html_safe}');
+  pingData = [['day', 'ping']].concat(pingData);
+  pingData = google.visualization.arrayToDataTable(pingData);
+  
+  var optionsDownload = {
+    title: 'average download by day in megabyte',
+    curveType: 'function',
+    legend: { position: 'bottom' }
+  };
+  
+  var optionsUpload = {
+    title: 'average upload by day in megabyte',
+    curveType: 'function',
+    legend: { position: 'bottom' }
+  };
+
+  var optionsPing = {
+    title: 'average ping by day in ms',
+    curveType: 'function',
+    legend: { position: 'bottom' }
+  };
+  
+  var download_chart = new google.visualization.LineChart(document.getElementById('download_chart'));
+  var upload_chart = new google.visualization.LineChart(document.getElementById('upload_chart'));
+  var ping_chart = new google.visualization.LineChart(document.getElementById('ping_chart'));
+  
+  download_chart.draw(downloadData, optionsDownload);
+  upload_chart.draw(uploadData, optionsUpload);
+  ping_chart.draw(pingData, optionsPing);
+  }
+
 %h1 Welcome Homeboy
+.container
+ 
+  .row
+    %h3 
+      online
+      %i.fas.fa-circle{class:  @last.internet_connection? ? "text-success" : "text-danger"}
+  .row.mb-3 
+    .card
+      .card-header
+        Last Updates
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          = @last.last_updated
+        %li.list-group-item
+          %div{class:  @last.download_better_as_average? ? "text-success" : "text-danger"}
+            = @last.last_speed
+        %li.list-group-item
+          last error
+          = @last.last_error
+  .row.mb-3
+    %h3 
+      Average download
+      = @last.average_download_formatted
+    
+    #download_chart{:style => "width: 900px; height: 500px"}
+
+  .row.mb-3
+    %h3 
+      Average upload
+      = @last.average_upload_formatted
+    #upload_chart{:style => "width: 900px; height: 500px"}
+  
+  .row.p-1
+    %h3 Average Ping ms
+  .row
+    #ping_chart{:style => "width: 900px; height: 500px"}

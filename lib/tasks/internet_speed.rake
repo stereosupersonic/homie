@@ -28,7 +28,6 @@ def import_speed(line)
 end
 
 namespace :internet_speed do
-
   desc "run the speedtest"
   task run: :environment do
     raw_result = `speedtest-cli --json`
