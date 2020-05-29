@@ -10,9 +10,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-      - name: install buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
+      - name: Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v1.6.2
         with:
           version: latest
       - name: build the image
