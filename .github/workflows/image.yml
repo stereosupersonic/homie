@@ -20,7 +20,7 @@ jobs:
           REPO_NAME="stereosupersonic/homie"
           docker buildx build \
             --platform linux/amd64 \
-            -t ${REPO_NAME}:latest -t ${REPO_NAME}:${GITHUB_SHA} -t ${REPO_NAME}:amd64
+            -t ${REPO_NAME}:latest -t ${REPO_NAME}:${GITHUB_SHA} -t ${REPO_NAME}:amd64 \
             --progress plain \
             --push \
             . -f Dockerfile
