@@ -5,7 +5,7 @@ on:
     branches: master
 
 jobs:
-  amd64:
+  images:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,46 +19,7 @@ jobs:
         run: |
           REPO_NAME="stereosupersonic/homie"
           docker buildx build \
-            --platform linux/amd64 \
-            -t ${REPO_NAME}:latest -t ${REPO_NAME}:${GITHUB_SHA} -t ${REPO_NAME}:amd64 \
+            -t ${REPO_NAME}:latest -t ${REPO_NAME}:${GITHUB_SHA} \
             --progress plain \
             --push \
-            . -f Dockerfile
-  arm64v8:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up docker buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1.6.2
-        with:
-          buildx-version: latest
-      - name: Build Dockerfile and push to DockerHub
-        run: |
-          REPO_NAME="stereosupersonic/homie"
-          docker buildx build \
-            --platform linux/arm64 \
-            -t ${REPO_NAME}:arm64v8 -t ${REPO_NAME}:arm64v8-${GITHUB_SHA} \
-            --progress plain \
-            --push \
-            .  -f Dockerfile
-  arm32v7:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up docker buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1.6.2
-        with:
-          buildx-version: latest
-      - name: Build Dockerfile and push to DockerHub
-        run: |
-          REPO_NAME="xavierniu/cloudreve"
-          docker buildx build \
-            --platform linux/arm/v7 \
-            -t ${REPO_NAME}:arm32v7 -t ${REPO_NAME}:arm32v7-${GITHUB_SHA} \
-            --progress plain \
-            --push \
-            . -f Dockerfile
+            --platform linux/amd64,linux/arm64 .
