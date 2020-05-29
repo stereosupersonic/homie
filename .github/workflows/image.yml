@@ -1,21 +1,64 @@
-name: build our image
+name: build multi arch images 
 
 on:
   push:
     branches: master
 
 jobs:
-  build:
+  amd64:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Docker Buildx
-        uses: crazy-max/ghaction-docker-buildx@v1.6.2
+      - name: Set up docker buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx
         with:
-          version: latest
-      - name: build the image
+          buildx-version: latest
+      - name: Build Dockerfile and push to DockerHub
         run: |
+          REPO_NAME="stereosupersonic/homie"
           docker buildx build \
-            --tag your-stereosupersonic/homie:latest \
-            --platform linux/amd64,linux/arm64 .
+            --platform linux/amd64 \
+            -t ${REPO_NAME}:latest -t ${REPO_NAME}:${GITHUB_SHA} -t ${REPO_NAME}:amd64
+            --progress plain \
+            --push \
+            . -f Dockerfile
+  arm64v8:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up docker buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx
+        with:
+          buildx-version: latest
+      - name: Build Dockerfile and push to DockerHub
+        run: |
+          REPO_NAME="stereosupersonic/homie"
+          docker buildx build \
+            --platform linux/arm64 \
+            -t ${REPO_NAME}:arm64v8 -t ${REPO_NAME}:arm64v8-${GITHUB_SHA} \
+            --progress plain \
+            --push \
+            .  -f Dockerfile
+  arm32v7:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up docker buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx
+        with:
+          buildx-version: latest
+      - name: Build Dockerfile and push to DockerHub
+        run: |
+          REPO_NAME="xavierniu/cloudreve"
+          docker buildx build \
+            --platform linux/arm/v7 \
+            -t ${REPO_NAME}:arm32v7 -t ${REPO_NAME}:arm32v7-${GITHUB_SHA} \
+            --progress plain \
+            --push \
+            . -f Dockerfile
