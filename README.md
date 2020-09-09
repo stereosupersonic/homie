@@ -52,20 +52,38 @@ bin/rake internet_speed:import["~/Downloads/speedtest.log"]
 
 docker-compose run web rake internet_speed:import["~/Downloads/speedtest.log"]
 
-# production
+## production deploy
 
-## build
-
-```
-docker-compose -f docker-compose.production.yml build
-```
-
-## run
+### checkout source
 
 ```
-docker-compose -f docker-compose.production.yml up -d
+git clone git@github.com:stereosupersonic/homie.git
 ```
 
+### setup
+
+
+create a new file .env
+
+```
+cd homie
+cp config/env.sample .env
+```
+
+```
+PORT=3000 # depend on the other containers0
+
+DATABASE_HOST="192.168.1.69" 
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=postgres_pw
+DATABASE_NAME=homie_production
+```
+
+### build and run image
+
+```
+docker-compose -f traefik.yml up -d
+```
 
 # database
 

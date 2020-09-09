@@ -7,19 +7,12 @@ services:
     networks:
       - web 
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
+      - "${PORT}:3000"
     labels:
       - traefik.http.routers.dashboard.rule=Host(`dashboard.deimel.de`)
       - traefik.http.services.dashboard.loadbalancer.server.port=3000
     environment:
-      DATABASE_HOST: '192.168.1.69'
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgresdb
-      DATABASE_NAME: homie_production
-      RAILS_LOG_TO_STDOUT: "true" 
-      RAILS_SERVE_STATIC_FILES: "true"
+      - .env
 networks:
   web:
     external: true
