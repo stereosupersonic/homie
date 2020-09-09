@@ -11,7 +11,7 @@ services:
     labels:
       - traefik.http.routers.dashboard.rule=Host(`dashboard.deimel.de`)
       - traefik.http.services.dashboard.loadbalancer.server.port=3000
-    environment:
+    env_file:
       - .env
 networks:
   web:
