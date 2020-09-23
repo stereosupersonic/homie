@@ -7,6 +7,8 @@
 #
 set :output, "/var/log/cron.log"
 
+ENV.each { |k, v| env(k, v) } # bug fix for https://stackoverflow.com/questions/31118033/could-not-find-rake-using-whenever-rails
+
 every 5.minutes do
   rake "internet_speed:run"
 end

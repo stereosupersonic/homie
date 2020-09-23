@@ -3,11 +3,10 @@
 # Start the run once job.
 echo "Docker container has been started"
 
-declare -p | grep -Ev 'BASHOPTS|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /container.env
-
 # Setup a cron test schedule
 mkdir -p /var/log/
 touch /var/log/cron.log
+
 echo "write whenever cront entries"
 bundle exec whenever --update-crontab
 
